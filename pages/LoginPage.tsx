@@ -5,6 +5,7 @@ import { useAuth } from '../App';
 import { DB } from '../services/db.service';
 import { logger } from '../services/audit.service';
 import { User } from '../types';
+import { verifyPassword } from '../services/securityService';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -30,7 +31,7 @@ const LoginPage: React.FC = () => {
       return;
     }
 
-    if (user && user.passwordHash === btoa(password)) {
+    if (user && await verifyPassword(password, user.passwordHash)) {
       DB.updateOne('users', user.id, { failedLoginAttempts: 0 });
       setAuth({ ...auth, user, isMfaPending: true });
       showToast('Phase 1 Authorized. Waiting for MFA.', 'SUCCESS');
