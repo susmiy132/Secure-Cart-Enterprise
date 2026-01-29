@@ -128,6 +128,9 @@ const LoginPage: React.FC = () => {
                   required
                 />
               </div>
+              {DB.findOne<User>('users', { email }) && (
+                <p className="text-[10px] text-slate-500 mt-2">Failed attempts: {DB.findOne<User>('users', { email })?.failedLoginAttempts || 0}</p>
+              )}
             </div>
             <div>
               <div className="flex justify-between items-center mb-2">
