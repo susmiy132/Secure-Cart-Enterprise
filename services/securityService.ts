@@ -43,6 +43,17 @@ export const simulateMfaVerification = async (code: string): Promise<boolean> =>
   return code === '123456'; // Static mock code
 };
 
+// Password hashing helpers (stubs). Replace with Argon2 in production.
+export const hashPassword = async (password: string): Promise<string> => {
+  // NOTE: This is a placeholder. Replace with Argon2 or similar.
+  return btoa(password);
+};
+
+export const verifyPassword = async (password: string, hash: string): Promise<boolean> => {
+  const computed = await hashPassword(password);
+  return computed === hash;
+};
+
 export const checkLockout = (email: string): number | null => {
   const lockedUntil = lockedAccounts[email];
   if (lockedUntil && lockedUntil > Date.now()) {
