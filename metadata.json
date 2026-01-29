@@ -1,0 +1,7 @@
+{
+  "name": "SecureCart - Enterprise E-Commerce",
+  "description": "A robust, high-security e-commerce platform featuring Multi-Factor Authentication (MFA), Role-Based Access Control (RBAC), and automated activity logging. Designed for high-end retail with an emphasis on cybersecurity and user privacy.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
