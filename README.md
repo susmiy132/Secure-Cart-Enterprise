@@ -10,6 +10,8 @@ View your app in AI Studio: https://ai.studio/apps/drive/1qDkeN96GA6jbr79ckwlkxW
 
 ## Run Locally
 
+**Security:** See `SECURITY_COMMIT_LIST.md` for a curated list of planned backend security improvements and hardening tasks.
+
 **Prerequisites:**  Node.js
 
 
