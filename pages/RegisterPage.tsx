@@ -12,12 +12,11 @@ const RegisterPage: React.FC = () => {
   const { showToast } = useAuth();
   const navigate = useNavigate();
 
+  // Use centralized password strength validator
+  import { verifyPasswordStrength } from '../services/securityService';
+
   const validatePassword = (pass: string) => {
-    let score = 0;
-    if (pass.length > 8) score++;
-    if (/[A-Z]/.test(pass)) score++;
-    if (/[0-9]/.test(pass)) score++;
-    if (/[^A-Za-z0-9]/.test(pass)) score++;
+    const score = verifyPasswordStrength(pass);
     setStrength(score);
     return score;
   };
