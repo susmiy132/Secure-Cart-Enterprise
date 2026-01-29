@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '../App';
 import { logger } from '../services/audit.service';
+import { useNavigate } from 'react-router-dom';
 
 const ProfilePage: React.FC = () => {
   const { auth } = useAuth();
+  const navigate = useNavigate();
   const [editing, setEditing] = useState(false);
   const [profile, setProfile] = useState({
     fullName: auth.user?.fullName || '',
@@ -120,9 +122,14 @@ const ProfilePage: React.FC = () => {
                     <span className="text-slate-800 font-bold">HARDENED</span>
                   </div>
                 </div>
-                <button className="w-full mt-6 bg-slate-900 text-white text-[10px] font-bold py-2.5 rounded-xl hover:bg-slate-800 transition uppercase tracking-widest">
-                  Rotate Security Keys
-                </button>
+                <div className="mt-6 space-y-2">
+                  <button onClick={() => navigate('/mfa-setup')} className="w-full bg-white border border-slate-200 text-slate-700 text-[10px] font-bold py-2.5 rounded-xl hover:bg-slate-50 transition uppercase tracking-widest">
+                    Manage MFA Settings
+                  </button>
+                  <button className="w-full bg-slate-900 text-white text-[10px] font-bold py-2.5 rounded-xl hover:bg-slate-800 transition uppercase tracking-widest">
+                    Rotate Security Keys
+                  </button>
+                </div>
               </div>
             </div>
           </div>
