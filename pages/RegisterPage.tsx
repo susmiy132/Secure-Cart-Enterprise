@@ -5,6 +5,7 @@ import { DB } from '../services/db.service';
 import { logger } from '../services/audit.service';
 import { useAuth } from '../App';
 import { UserRole } from '../types';
+import { verifyPasswordStrength, hashPassword } from '../services/securityService';
 
 const RegisterPage: React.FC = () => {
   const [form, setForm] = useState({ fullName: '', email: '', password: '' });
@@ -13,7 +14,6 @@ const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
 
   // Use centralized password strength validator
-  import { verifyPasswordStrength } from '../services/securityService';
 
   const validatePassword = (pass: string) => {
     const score = verifyPasswordStrength(pass);
@@ -21,7 +21,7 @@ const RegisterPage: React.FC = () => {
     return score;
   };
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (strength < 3) {
       showToast('Security policy requires a Medium-strength password or higher.', 'WARNING');
@@ -34,9 +34,11 @@ const RegisterPage: React.FC = () => {
       return;
     }
 
+    const pwHash = await hashPassword(form.password);
+
     DB.insertOne('users', {
       ...form,
-      passwordHash: btoa(form.password),
+      passwordHash: pwHash,
       role: form.email.includes('admin') ? UserRole.ADMIN : UserRole.CUSTOMER,
       mfaEnabled: true,
       failedLoginAttempts: 0,
