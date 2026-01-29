@@ -131,6 +131,30 @@ const ProfilePage: React.FC = () => {
                   </button>
                 </div>
               </div>
+              <div>
+                <div className="p-6 bg-white rounded-2xl border border-slate-200">
+                  <div className="flex justify-between items-center mb-4">
+                    <h4 className="text-sm font-black">Active Sessions</h4>
+                    <button className="text-xs font-black text-indigo-600">Revoke All</button>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                      <div>
+                        <div className="font-bold">Chrome on Windows</div>
+                        <div className="text-[11px] text-slate-400">Last active 2026-01-28 12:34</div>
+                      </div>
+                      <button className="text-xs font-black text-red-500">Revoke</button>
+                    </div>
+                    <div className="flex items-center justify-between p-3 border rounded-lg">
+                      <div>
+                        <div className="font-bold">iPhone 14</div>
+                        <div className="text-[11px] text-slate-400">Last active 2026-01-27 08:21</div>
+                      </div>
+                      <button className="text-xs font-black text-red-500">Revoke</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
